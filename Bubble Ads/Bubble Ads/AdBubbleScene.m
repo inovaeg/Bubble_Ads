@@ -19,10 +19,10 @@
 #define AVOCARROT_API_KEY   @"d2d4f6a7a99471027143e8bf17138c054ccb5786"
 #define AVOCARROT_PLACEMENT @"d8847579caad3a624970f179d50b2d9e77ec9d14"
 
-#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.12
-#define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 20
+#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.1
+#define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 36
 
-#define BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME 0.09
+#define BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME 0.03
 #define BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT 8
 
 #define BUBBLE_SPEED 30
@@ -124,7 +124,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
     NSMutableArray * animatedBubbleTextureArray = [[NSMutableArray alloc] init];
     for(NSInteger i = 1; i <= NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT; i++){
-        NSString * imageName = [NSString stringWithFormat:@"bubble-%ld.png",(long)i];
+        NSString * imageName = [NSString stringWithFormat:@"bubble_%ld.png",(long)i];
         SKTexture * texture = [atlas textureNamed:imageName];
         [animatedBubbleTextureArray addObject:texture];
     }
@@ -198,8 +198,9 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(SKSpriteNode *)createBubble{
     
-    NSString * bubbleImageName = @"bubble-1.png";
+    NSString * bubbleImageName = @"bubble_1.png";
     SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
+    NSLog(@"[%f][%f]",bubbleNode.size.width,bubbleNode.size.height);
     bubbleNode.name = BUBBLE_NODE_NAME;
     [self applyBubbleProperties:bubbleNode];
     [self applyBubbleAnimationToBubble:bubbleNode];
@@ -384,7 +385,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
     NSMutableArray * animatedBubbleExplosionTextureArray = [[NSMutableArray alloc] init];
     for(NSInteger i = 1; i <= BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT; i++){
-        NSString * imageName = [NSString stringWithFormat:@"bubbles_bomb%ld.png",(long)i];
+        NSString * imageName = [NSString stringWithFormat:@"bubbles_explosion_%ld.png",(long)i];
         SKTexture * texture = [atlas textureNamed:imageName];
         [animatedBubbleExplosionTextureArray addObject:texture];
     }
@@ -408,7 +409,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     AvocarrotCustom *myAd = [[AvocarrotCustom alloc] init] ;
     [myAd setApiKey: AVOCARROT_API_KEY];
     [myAd setSandbox:NO];
-    [myAd setLogger:YES withLevel:@"ALL"];
+    [myAd setLogger:NO withLevel:@"ALL"];
     [myAd loadAdForPlacement: AVOCARROT_PLACEMENT];
     [myAd setDelegate:self];
 }
@@ -431,7 +432,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         if (([ad getImageHeight]>0) && ([ad getImageWidth]>0) && ([ad getImage] != nil)){
             //            UIImage * adImage = [ad getImage];
             CGPoint bubbleCenter = [self geRandomPointAtScreenBoundriesForBubbleSize:CGSizeMake(250, 250)];
-            [self addBubble:@"bubble-1" atCenter:bubbleCenter withAdImage:ad];
+            [self addBubble:@"bubble_1" atCenter:bubbleCenter withAdImage:ad];
             
             //            [self addBubbleAdWithCenter:bubbleCenter withAdImage:ad];
         }
