@@ -25,6 +25,9 @@
 #define BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME 0.03
 #define BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT 8
 
+#define BUBBLE_COLLISION_ANIMATION_FRAME_TIME 0.11
+#define BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT 10
+
 #define BUBBLE_SPEED 30
 #define BUBBLES_COUNT 5
 #define BUBBLES_NEW_ANGLE_DIFF 70 // angle difference between new and old bubble velocity
@@ -107,7 +110,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
     
-    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 20)/2];
+    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30)/2];
     node.physicsBody.dynamic = YES;
     node.physicsBody.usesPreciseCollisionDetection = YES;
     node.physicsBody.density = 5;
@@ -115,7 +118,8 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     node.physicsBody.allowsRotation = NO;
     node.physicsBody.categoryBitMask = bubbleCategory;
     node.physicsBody.collisionBitMask = bubbleCategory;
-    
+    node.physicsBody.contactTestBitMask = bubbleCategory;
+
 }
 
 -(void)applyBubbleAnimationToBubble:(SKSpriteNode *)bubble{
@@ -207,41 +211,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
     return bubbleNode;
 }
-
-//-(SKSpriteNode *)addBubbleAdWithCenter:(CGPoint)center withAdImage:(AVCustomAd *)ad{
-//
-//    SKSpriteNode * bubbleNode = [self createBubble];
-//    [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[AVOCARROT_AD_DIC_KEY]]];
-//    [self.bubblesArray addObject:bubbleNode];
-////    [self addChild:bubbleNode];
-//
-//
-//    UIImage * adImage = [ad getImage];
-//    CGFloat adImagePadding = ADS_IMAGE_PADDING;
-//    CGFloat minSize = adImage.size.height;
-//    if(minSize > adImage.size.width){
-//        minSize = adImage.size.width;
-//    }
-//    CGFloat newImageSize = minSize - adImagePadding*2;
-//
-//    UIImage * circleAdImage = [AdBubbleScene getCircleImage:adImage withRadius:newImageSize/2];
-//    CGSize adNodeSize = CGSizeMake( bubbleNode.size.width - adImagePadding*2 , bubbleNode.size.height -adImagePadding*2);
-//
-//    SKSpriteNode * adNode = [self createAdNodeWithAdImage:circleAdImage size:adNodeSize];
-//    bubbleNode.position = center;
-////    [self addChild:adNode];
-////    [adNode addChild:bubbleNode];
-//
-//
-//    adNode.zPosition = -3;
-//    bubbleNode.zPosition = -2;
-//    NSLog(@"[%f] -- [%f]",adNode.zPosition,bubbleNode.zPosition);
-//
-//    [self addChild:bubbleNode];
-//    [bubbleNode addChild:adNode];
-//
-//    return adNode;
-//}
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
@@ -360,7 +329,8 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.selectedNode.physicsBody.velocity = getRandomVelocity(self.minVelocity,CGVectorMake(self.minVelocity, 0));
         self.selectedNode.physicsBody.categoryBitMask = bubbleCategory;
         self.selectedNode.physicsBody.collisionBitMask = bubbleCategory;
-        
+        self.selectedNode.physicsBody.contactTestBitMask = bubbleCategory;
+
         if(self.isClick){
             [self exploadeBubble:self.selectedNode];
         }
@@ -401,8 +371,39 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     [bubble runAction:[SKAction sequence:[NSArray arrayWithObjects:actionAnimation, actionOpenAd,actionMoveDone, nil]]];
 }
 
+
+-(void)applyBubbleCollisionAnimationToBubble:(SKSpriteNode *)bubble{
+    
+    [bubble removeAllActions];
+    
+    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
+    
+    NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
+    for(NSInteger i = 1; i <= BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT; i++){
+        NSString * imageName = [NSString stringWithFormat:@"bubble_collision_%ld.png",(long)i];
+        SKTexture * texture = [atlas textureNamed:imageName];
+        [animatedBubbleCollisionTextureArray addObject:texture];
+    }
+    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+    
+    [bubble runAction:actionAnimation completion:^{
+        [bubble removeAllActions];
+        [self applyBubbleAnimationToBubble:bubble];
+    }];
+}
+
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+//    NSLog(@"didBeginContact");
+    
+    SKPhysicsBody * firstBody = contact.bodyA;
+    SKPhysicsBody * secondBody = contact.bodyB;
+    
+    SKSpriteNode * bubbleNode1 = (SKSpriteNode *) firstBody.node;
+    SKSpriteNode * bubbleNode2 = (SKSpriteNode *) secondBody.node;
+    
+    [self applyBubbleCollisionAnimationToBubble:bubbleNode1];
+    [self applyBubbleCollisionAnimationToBubble:bubbleNode2];
 }
 
 -(void)requestAd{
@@ -430,25 +431,22 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^(void){
         // Get Ad Image
         if (([ad getImageHeight]>0) && ([ad getImageWidth]>0) && ([ad getImage] != nil)){
-            //            UIImage * adImage = [ad getImage];
             CGPoint bubbleCenter = [self geRandomPointAtScreenBoundriesForBubbleSize:CGSizeMake(250, 250)];
             [self addBubble:@"bubble_1" atCenter:bubbleCenter withAdImage:ad];
-            
-            //            [self addBubbleAdWithCenter:bubbleCenter withAdImage:ad];
         }
     });
 }
 
 -(void)onAdClick:(NSString *)message{
-    NSLog(@"onAdClick message %@: ",message);
+//    NSLog(@"onAdClick message %@: ",message);
 }
 
 - (void) onAdImpression: (NSString *) message{
-    NSLog(@"onAdImpression message %@: ",message);
+//    NSLog(@"onAdImpression message %@: ",message);
 }
 
 -(void) userWillLeaveApp{
-    NSLog(@"userWillLeaveApp");
+//    NSLog(@"userWillLeaveApp");
     
 }
 
