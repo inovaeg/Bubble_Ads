@@ -35,8 +35,7 @@ The floating Ads are proven to be more engaging due to their interactive nature,
 
 The library currently display ads from [Avocarrot](http://www.avocarrot.com/) Ad network but we plan to support other Ad networks.
 
-// Add new Image here.
-![MY_COOL_IMAGE](https://raw.githubusercontent.com/inovaeg/UI-Hierarchy-View/master/sample.png)
+![MY_COOL_IMAGE](https://raw.githubusercontent.com/inovaeg/Bubble_Ads/master/sample.png)
 
 ##Installation
 
