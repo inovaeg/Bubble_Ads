@@ -3,7 +3,7 @@
 //  Bubble Ads
 //
 
-//  Copyright (c) 2015 Kareem. All rights reserved.
+//  Copyright (c) 2015 Inova LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

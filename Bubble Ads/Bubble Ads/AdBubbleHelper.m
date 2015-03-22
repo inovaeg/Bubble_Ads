@@ -2,8 +2,8 @@
 //  AdBubbleHelper.m
 //  Bubble Ads
 //
-//  Created by Inova PC 06 on 3/17/15.
-//  Copyright (c) 2015 Kareem. All rights reserved.
+//  Created by Kareem Ahmed on 3/17/15.
+//  Copyright (c) 2015 Inova LLC. All rights reserved.
 //
 
 #import "AdBubbleHelper.h"
@@ -16,8 +16,8 @@
     
     // Configure the view.
     skView.allowsTransparency = YES;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+//    skView.showsFPS = YES;
+//    skView.showsNodeCount = YES;
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
     

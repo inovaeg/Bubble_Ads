@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214289721ABF017100B86063 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214289711ABF017100B86063 /* AvocarrotSDK.framework */; };
 		21750B301AB837F000F9E485 /* AdBubbleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21750B2F1AB837F000F9E485 /* AdBubbleHelper.m */; };
 		21750B3A1AB8B77100F9E485 /* bubbles_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 21750B381AB8B77100F9E485 /* bubbles_background.png */; };
 		21750B3B1AB8B77100F9E485 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 21750B391AB8B77100F9E485 /* sprites.atlas */; };
-		219C35601AB9C6C900DEDE59 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219C355F1AB9C6C900DEDE59 /* AvocarrotSDK.framework */; };
 		21CEE3221AB773BE005E285A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3211AB773BE005E285A /* main.m */; };
 		21CEE3251AB773BE005E285A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3241AB773BE005E285A /* AppDelegate.m */; };
 		21CEE3281AB773BE005E285A /* AdBubbleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3271AB773BE005E285A /* AdBubbleScene.m */; };
@@ -37,11 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		214289711ABF017100B86063 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AvocarrotSDK.framework; path = Frameworks/AvocarrotSDK.framework; sourceTree = "<group>"; };
 		21750B2E1AB837F000F9E485 /* AdBubbleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleHelper.h; sourceTree = "<group>"; };
 		21750B2F1AB837F000F9E485 /* AdBubbleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBubbleHelper.m; sourceTree = "<group>"; };
 		21750B381AB8B77100F9E485 /* bubbles_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbles_background.png; sourceTree = "<group>"; };
 		21750B391AB8B77100F9E485 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
-		219C355F1AB9C6C900DEDE59 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AvocarrotSDK.framework; path = Frameworks/AvocarrotSDK.framework; sourceTree = "<group>"; };
 		21CEE31C1AB773BE005E285A /* Bubble Ads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bubble Ads.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CEE3201AB773BE005E285A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21CEE3211AB773BE005E285A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,8 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				219C35601AB9C6C900DEDE59 /* AvocarrotSDK.framework in Frameworks */,
 				21CEE3511AB77458005E285A /* AdSupport.framework in Frameworks */,
+				214289721ABF017100B86063 /* AvocarrotSDK.framework in Frameworks */,
 				21CEE34F1AB77452005E285A /* CoreTelephony.framework in Frameworks */,
 				21CEE34D1AB7744A005E285A /* SystemConfiguration.framework in Frameworks */,
 				21CEE34B1AB77443005E285A /* CoreGraphics.framework in Frameworks */,
@@ -90,7 +90,7 @@
 		21750B2D1AB833AA00F9E485 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				219C355F1AB9C6C900DEDE59 /* AvocarrotSDK.framework */,
+				214289711ABF017100B86063 /* AvocarrotSDK.framework */,
 				21CEE3501AB77458005E285A /* AdSupport.framework */,
 				21CEE34E1AB77452005E285A /* CoreTelephony.framework */,
 				21CEE34C1AB7744A005E285A /* SystemConfiguration.framework */,
@@ -419,6 +419,8 @@
 					Ads/Frameworks,
 					"$(PROJECT_DIR)/Bubble",
 					Ads/Frameworks,
+					"$(PROJECT_DIR)/Bubble",
+					Ads/Frameworks,
 				);
 				INFOPLIST_FILE = "Bubble Ads/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -432,6 +434,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Bubble",
+					Ads/Frameworks,
 					"$(PROJECT_DIR)/Bubble",
 					Ads/Frameworks,
 					"$(PROJECT_DIR)/Bubble",

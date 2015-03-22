@@ -2,8 +2,8 @@
 //  Bubble_AdsTests.m
 //  Bubble AdsTests
 //
-//  Created by Inova PC 06 on 3/16/15.
-//  Copyright (c) 2015 Kareem. All rights reserved.
+//  Created by Kareem Ahmed on 3/16/15.
+//  Copyright (c) 2015 Inova LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
