@@ -12,4 +12,7 @@
 {
     SKTextureAtlas *atlas;
 }
+
+-(void)updateBodyWithFrameRect:(CGRect)rect;
+
 @end

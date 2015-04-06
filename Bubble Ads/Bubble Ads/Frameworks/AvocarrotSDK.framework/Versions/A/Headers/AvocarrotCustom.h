@@ -17,7 +17,7 @@
 /**
  * The Native Custom Ad delegate
  */
-@property (nonatomic, strong) id<AVCustomAdDelegate> delegate;
+@property (nonatomic, weak) id<AVCustomAdDelegate> delegate;
 
 /**
  * Loads an ad for a given placement.

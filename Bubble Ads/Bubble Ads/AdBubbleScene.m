@@ -113,6 +113,18 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     return self;
 }
 
+-(void)updateBodyWithFrameRect:(CGRect)rect{
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:rect];
+    
+    for(NSInteger i = 0 ; i < self.bubblesArray.count; i++){
+        SKSpriteNode * node = [self.bubblesArray objectAtIndex:i];
+        CGPoint position = [node position];
+        CGPoint newPoint = CGPointMake(position.y , position.x);
+        [node setPosition:newPoint];
+    }
+    
+}
+
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
     
     node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30)/2];
@@ -347,7 +359,10 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.selectedNode = nil;
     }else{
         //Touch outside on the screen
-     //   [self.view presentScene:nil ];
+//        [self removeAllChildren];
+//        [self.view removeFromSuperview];
+//        [self.view presentScene:nil];
+//        [self removeFromParent];
     }
 }
 
@@ -419,7 +434,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 }
 
 -(void)requestAd{
-    AvocarrotCustom *myAd = [[AvocarrotCustom alloc] init] ;
+    AvocarrotCustom *myAd = [[AvocarrotCustom alloc] init];
     [myAd setApiKey: AVOCARROT_API_KEY];
     [myAd setSandbox:NO];
     [myAd setLogger:NO withLevel:@"ALL"];
@@ -461,5 +476,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 //    NSLog(@"userWillLeaveApp");
     
 }
+
 
 @end
