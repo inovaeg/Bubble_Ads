@@ -14,17 +14,17 @@
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    [AdBubbleHelper presentBubblesViewOnView:self.sceneView];
+//    [AdBubbleHelper presentBubblesViewOnView:self.sceneView];
 }
 
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [AdBubbleHelper startWithView:self.sceneView];
 }
 
 - (BOOL)shouldAutorotate

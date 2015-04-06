@@ -13,6 +13,5 @@
     SKTextureAtlas *atlas;
 }
 
--(void)updateBodyWithFrameRect:(CGRect)rect;
-
+-(void)updateBubbleLocationsAndPhysicalBodyWithFrameRect:(CGRect)rect;
 @end

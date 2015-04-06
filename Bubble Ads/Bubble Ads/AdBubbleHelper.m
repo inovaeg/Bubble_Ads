@@ -26,18 +26,31 @@
         //    skView.showsNodeCount = YES;
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = YES;
+
         
         // Create and configure the scene.
         SKScene * scene = [AdBubbleScene sceneWithSize:skView.bounds.size];
-//        scene.scaleMode = SKSceneScaleModeAspectFill;
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+
+        
+        // Present the scene.
+        [skView presentScene:scene];
+
+    }else{
+        AdBubbleScene* sc = (AdBubbleScene*)skView.scene;
+        [sc updateBubbleLocationsAndPhysicalBodyWithFrameRect:skView.frame];
+    }
+}
+
++ (void)startWithView:(SKView *)skView{
+        skView.allowsTransparency = YES;
+        skView.ignoresSiblingOrder = YES;
+        
+        SKScene * scene = [AdBubbleScene sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeResizeFill;
         
         // Present the scene.
         [skView presentScene:scene];
-    }else{
-        AdBubbleScene* sc = (AdBubbleScene*)skView.scene;
-        [sc updateBodyWithFrameRect:skView.frame];
-    }
 }
 
 @end

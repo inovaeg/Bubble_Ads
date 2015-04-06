@@ -12,5 +12,6 @@
 @interface AdBubbleHelper : NSObject
 
 +(void)presentBubblesViewOnView:(SKView *)skView;
++(void)startWithView:(SKView *)skView;
 
 @end

@@ -37,6 +37,9 @@
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 @interface AdBubbleScene() <SKPhysicsContactDelegate,AVCustomAdDelegate>
+{
+    UIDeviceOrientation currentOrientation;
+}
 
 @property (nonatomic) SKSpriteNode * selectedNode;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
@@ -46,7 +49,6 @@
 @property (nonatomic) BOOL isClick ;
 
 @property (nonatomic) NSMutableArray * bubblesArray;
-
 
 @end
 
@@ -109,11 +111,32 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         for(NSInteger i = 0 ; i < self.bubblesCount; i++){
             [self requestAd];
         }
+        
+        //Listen on Orientation
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationWillChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
+        currentOrientation = [[UIDevice currentDevice] orientation];
     }
     return self;
 }
 
--(void)updateBodyWithFrameRect:(CGRect)rect{
+- (void)deviceOrientationWillChange:(NSNotification *)notification {
+    //Obtain current device orientation
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    
+    if ((UIDeviceOrientationIsPortrait(currentOrientation) && UIDeviceOrientationIsPortrait(orientation)) ||
+        (UIDeviceOrientationIsLandscape(currentOrientation) && UIDeviceOrientationIsLandscape(orientation)) ||
+        (orientation == UIDeviceOrientationFaceUp || orientation == UIDeviceOrientationFaceDown) ) {
+        //still saving the current orientation
+        return;
+    }else{
+        [self updateBubbleLocationsAndPhysicalBodyWithFrameRect:self.view.frame];
+        currentOrientation = orientation;
+    }
+    //Do my thing
+}
+
+-(void)updateBubbleLocationsAndPhysicalBodyWithFrameRect:(CGRect)rect{
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:rect];
     
     for(NSInteger i = 0 ; i < self.bubblesArray.count; i++){
@@ -359,10 +382,11 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.selectedNode = nil;
     }else{
         //Touch outside on the screen
-//        [self removeAllChildren];
-//        [self.view removeFromSuperview];
-//        [self.view presentScene:nil];
-//        [self removeFromParent];
+        SKView* view = self.view;
+        [self removeAllChildren];
+        [view presentScene:nil];
+        [view removeFromSuperview];
+        [self removeFromParent];
     }
 }
 
@@ -477,5 +501,9 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
 }
 
+-(void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+}
 
 @end
