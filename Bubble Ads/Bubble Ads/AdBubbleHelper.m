@@ -13,7 +13,6 @@
 
 
 +(void)presentBubblesViewOnView:(SKView *)skView{
-    
     // Configure the view.
     skView.allowsTransparency = YES;
 //    skView.showsFPS = YES;

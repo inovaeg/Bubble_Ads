@@ -8,6 +8,7 @@
 
 #import "AdBubbleScene.h"
 #import <AvocarrotSDK/AvocarrotCustom.h>
+#import "BubbleSpritesHeader.h"
 
 #define AVOCARROT_AD_DIC_KEY @"adObject"
 
@@ -91,6 +92,10 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         //        NSLog(@"Size: %@", NSStringFromCGSize(size));
+
+        //Loading SpriteSheet
+        self->atlas = [SKTextureAtlas atlasNamed:SPRITES_ATLAS_NAME];
+        
         self.minVelocity = BUBBLE_SPEED;
         self.bubblesCount = BUBBLES_COUNT;
         self.bubblesArray = [[NSMutableArray alloc] init];
@@ -124,16 +129,20 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)applyBubbleAnimationToBubble:(SKSpriteNode *)bubble{
     
-    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
-    
-    NSMutableArray * animatedBubbleTextureArray = [[NSMutableArray alloc] init];
-    for(NSInteger i = 1; i <= NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT; i++){
-        NSString * imageName = [NSString stringWithFormat:@"bubble_%ld.png",(long)i];
-        SKTexture * texture = [atlas textureNamed:imageName];
-        [animatedBubbleTextureArray addObject:texture];
-    }
-    
-    SKAction * runAnimation = [SKAction animateWithTextures:animatedBubbleTextureArray timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
+//    
+//    NSMutableArray * animatedBubbleTextureArray = [[NSMutableArray alloc] init];
+//    for(NSInteger i = 1; i <= 9 /*NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT*/ ; i++){
+//        NSString * imageName = [NSString stringWithFormat:@"bubble_%ld.png",(long)i];
+//        SKTexture * texture = [atlas textureNamed:imageName];
+//        [animatedBubbleTextureArray addObject:texture];
+//    }
+//    
+//    SKAction * runAnimation = [SKAction animateWithTextures:animatedBubbleTextureArray timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    [bubble runAction:[SKAction repeatActionForever:runAnimation]];
+
+    SKAction * runAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    [bubble runAction:runAnimation ];
     [bubble runAction:[SKAction repeatActionForever:runAnimation]];
 }
 
@@ -162,8 +171,8 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
     CGFloat newImageSize = minSize - adImagePadding*2;
     UIImage * circleAdImage = [AdBubbleScene getCircleImage:adImage withRadius:newImageSize/2];
-    
     SKTexture * adTexture = [SKTexture textureWithImage:circleAdImage];
+    
     SKSpriteNode * adNode = [SKSpriteNode spriteNodeWithTexture:adTexture size:CGSizeMake( bubble.size.width - adImagePadding*2 , bubble.size.height -adImagePadding*2)];
     adNode.name = AD_NODE_NAME;
     adNode.position = CGPointMake(0, 0);
@@ -336,6 +345,9 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         }
         
         self.selectedNode = nil;
+    }else{
+        //Touch outside on the screen
+     //   [self.view presentScene:nil ];
     }
 }
 
@@ -350,24 +362,25 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(void)applyBubbleExplosionAnimationToBubble:(SKSpriteNode *)bubble{
     
     [bubble removeAllActions];
-    
-    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
-    
-    NSMutableArray * animatedBubbleExplosionTextureArray = [[NSMutableArray alloc] init];
-    for(NSInteger i = 1; i <= BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT; i++){
-        NSString * imageName = [NSString stringWithFormat:@"bubbles_explosion_%ld.png",(long)i];
-        SKTexture * texture = [atlas textureNamed:imageName];
-        [animatedBubbleExplosionTextureArray addObject:texture];
-    }
     [bubble removeAllChildren];
+//    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
+//    
+//    NSMutableArray * animatedBubbleExplosionTextureArray = [[NSMutableArray alloc] init];
+//    for(NSInteger i = 1; i <= BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT; i++){
+//        NSString * imageName = [NSString stringWithFormat:@"bubbles_explosion_%ld.png",(long)i];
+//        SKTexture * texture = [atlas textureNamed:imageName];
+//        [animatedBubbleExplosionTextureArray addObject:texture];
+//    }
+//    [bubble removeAllChildren];
     SKAction * actionMoveDone = [SKAction removeFromParent];
-    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleExplosionTextureArray timePerFrame:BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+    
+    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLES_EXPLOSION timePerFrame:BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleExplosionTextureArray timePerFrame:BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
     SKAction * actionOpenAd = [SKAction runBlock:^{
         AVCustomAd * ad = [bubble.userData objectForKey:AVOCARROT_AD_DIC_KEY];
         [self openAd:ad];
     }];
-    
     [bubble runAction:[SKAction sequence:[NSArray arrayWithObjects:actionAnimation, actionOpenAd,actionMoveDone, nil]]];
 }
 
@@ -375,16 +388,15 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(void)applyBubbleCollisionAnimationToBubble:(SKSpriteNode *)bubble{
     
     [bubble removeAllActions];
-    
-    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
-    
-    NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
-    for(NSInteger i = 1; i <= BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT; i++){
-        NSString * imageName = [NSString stringWithFormat:@"bubble_collision_%ld.png",(long)i];
-        SKTexture * texture = [atlas textureNamed:imageName];
-        [animatedBubbleCollisionTextureArray addObject:texture];
-    }
-    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
+//    NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
+//    for(NSInteger i = 1; i <= BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT; i++){
+//        NSString * imageName = [NSString stringWithFormat:@"bubble_collision_%ld.png",(long)i];
+//        SKTexture * texture = [atlas textureNamed:imageName];
+//        [animatedBubbleCollisionTextureArray addObject:texture];
+//    }
+    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//   SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
     [bubble runAction:actionAnimation completion:^{
         [bubble removeAllActions];

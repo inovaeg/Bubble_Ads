@@ -9,5 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface AdBubbleScene : SKScene
-
+{
+    SKTextureAtlas *atlas;
+}
 @end

@@ -14,7 +14,6 @@
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    
     [AdBubbleHelper presentBubblesViewOnView:self.sceneView];
 }
 
