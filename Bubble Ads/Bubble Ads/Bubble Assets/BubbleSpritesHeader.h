@@ -195,5 +195,13 @@
         [SKTexture textureWithImageNamed:@"bubble_collision_10"]  \
     ]
 
+#define SPRITES_ANIM_BUBBLE_COLLISION2 @[ \
+        [SKTexture textureWithImageNamed:@"bubble_collision_1"], \
+        [SKTexture textureWithImageNamed:@"bubble_collision_2"], \
+        [SKTexture textureWithImageNamed:@"bubble_collision_3"], \
+        [SKTexture textureWithImageNamed:@"bubble_collision_4"], \
+        [SKTexture textureWithImageNamed:@"bubble_collision_5"], \
+        [SKTexture textureWithImageNamed:@"bubble_collision_6"] \
+]
 
 #endif // __SPRITES_ATLAS__

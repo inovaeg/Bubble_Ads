@@ -20,13 +20,13 @@
 #define AVOCARROT_API_KEY   @"d2d4f6a7a99471027143e8bf17138c054ccb5786"
 #define AVOCARROT_PLACEMENT @"d8847579caad3a624970f179d50b2d9e77ec9d14"
 
-#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.1
+#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.045
 #define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 36
 
 #define BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME 0.03
 #define BUBBLE_EXPLOSION_ANIMATION_FRAMES_COUNT 8
 
-#define BUBBLE_COLLISION_ANIMATION_FRAME_TIME 0.11
+#define BUBBLE_COLLISION_ANIMATION_FRAME_TIME 0.05
 #define BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT 10
 
 #define BUBBLE_SPEED 30
@@ -382,11 +382,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.selectedNode = nil;
     }else{
         //Touch outside on the screen
-        SKView* view = self.view;
-        [self removeAllChildren];
-        [view presentScene:nil];
-        [view removeFromSuperview];
-        [self removeFromParent];
+        if(self.bubblesArray.count > 0){
+            SKView* view = self.view;
+            [self removeAllChildren];
+            [view presentScene:nil];
+            [view removeFromSuperview];
+            [self removeFromParent];
+        }
     }
 }
 
@@ -434,10 +436,10 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 //        SKTexture * texture = [atlas textureNamed:imageName];
 //        [animatedBubbleCollisionTextureArray addObject:texture];
 //    }
-    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
+    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION2 timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
 //   SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
-    [bubble runAction:actionAnimation completion:^{
+    [bubble runAction:[SKAction repeatAction:actionAnimation count:2] completion:^{
         [bubble removeAllActions];
         [self applyBubbleAnimationToBubble:bubble];
     }];
