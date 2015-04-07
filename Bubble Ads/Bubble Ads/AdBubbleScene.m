@@ -20,7 +20,7 @@
 #define AVOCARROT_API_KEY   @"d2d4f6a7a99471027143e8bf17138c054ccb5786"
 #define AVOCARROT_PLACEMENT @"d8847579caad3a624970f179d50b2d9e77ec9d14"
 
-#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.045
+#define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.07
 #define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 36
 
 #define BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME 0.03
@@ -32,12 +32,16 @@
 #define BUBBLE_SPEED 30
 #define BUBBLES_COUNT 5
 #define BUBBLES_NEW_ANGLE_DIFF 70 // angle difference between new and old bubble velocity
+#define SHADOWVIEW_TIME 0.33f
+#define BUBBLE_FADEIN_TIME 0.5f
+#define BUBBLE_FADEOUT_TIME 0.33f
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 @interface AdBubbleScene() <SKPhysicsContactDelegate,AVCustomAdDelegate>
 {
+    UIView* shadowView;
     UIDeviceOrientation currentOrientation;
 }
 
@@ -148,6 +152,14 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
 }
 
+-(void)castShadowLayer{
+    shadowView = [[UIView alloc] initWithFrame:self.frame];
+    shadowView.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
+    shadowView.backgroundColor = [UIColor blackColor];
+    shadowView.alpha = 0.0f;
+    [self.view addSubview:shadowView];// Code to run after animation
+}
+
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
     
     node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30)/2];
@@ -177,8 +189,8 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 //    [bubble runAction:[SKAction repeatActionForever:runAnimation]];
 
     SKAction * runAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
-//    [bubble runAction:runAnimation ];
     [bubble runAction:[SKAction repeatActionForever:runAnimation]];
+//    [bubble runAction:runAnimation ];
 }
 
 +(UIImage *)getCircleImage:(UIImage *)image withRadius:(CGFloat)radius{
@@ -220,11 +232,14 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
     bubbleNode.name = BUBBLE_NODE_NAME;
     bubbleNode.position = center;
+    bubbleNode.alpha = 0.0f;
     [self applyBubbleProperties:bubbleNode];
     [self addChild:bubbleNode];
     SKSpriteNode * adNode= [self addAdImage:[ad getImage] toBubble:bubbleNode];
     [self.bubblesArray addObject:bubbleNode];
     [self applyBubbleAnimationToBubble:bubbleNode];
+    SKAction *fadeIn = [SKAction fadeInWithDuration:BUBBLE_FADEIN_TIME];
+    [bubbleNode runAction:fadeIn];
     
     [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[AVOCARROT_AD_DIC_KEY]]];
     
@@ -383,11 +398,31 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     }else{
         //Touch outside on the screen
         if(self.bubblesArray.count > 0){
-            SKView* view = self.view;
-            [self removeAllChildren];
-            [view presentScene:nil];
-            [view removeFromSuperview];
-            [self removeFromParent];
+            
+            SKAction *fadeOut = [SKAction fadeOutWithDuration:BUBBLE_FADEOUT_TIME];
+            for(NSInteger i = 0 ; i < self.bubblesArray.count - 1; i++){
+                SKSpriteNode* node = [self.bubblesArray objectAtIndex:i];
+                [node removeAllActions];[node runAction:fadeOut];
+            }
+            SKSpriteNode* node = [self.bubblesArray objectAtIndex:self.bubblesArray.count - 1 ];
+            [node removeAllActions];
+            [node runAction:fadeOut completion:^{
+                [self removeAllChildren];
+                [UIView transitionWithView:self.view
+                                  duration:SHADOWVIEW_TIME
+                                   options:UIViewAnimationOptionCurveEaseInOut
+                                animations:^{
+                                    shadowView.alpha = 0.0f;
+                                } completion:^(BOOL finished) {
+                                    [shadowView removeFromSuperview];shadowView = nil;
+                                    
+                                    SKView* view = self.view;
+                                    [view presentScene:nil];
+                                    [view removeFromSuperview];
+                                    [self removeFromParent];
+                                }];
+            }];
+            [self.bubblesArray removeAllObjects];
         }
     }
 }
@@ -428,7 +463,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)applyBubbleCollisionAnimationToBubble:(SKSpriteNode *)bubble{
     
-    [bubble removeAllActions];
+//    [bubble removeAllActions];
 //    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
 //    NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
 //    for(NSInteger i = 1; i <= BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT; i++){
@@ -485,6 +520,16 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         // Get Ad Image
         if (([ad getImageHeight]>0) && ([ad getImageWidth]>0) && ([ad getImage] != nil)){
             CGPoint bubbleCenter = [self geRandomPointAtScreenBoundriesForBubbleSize:CGSizeMake(250, 250)];
+            if(shadowView == nil){
+                [self castShadowLayer];
+                [UIView transitionWithView:self.view
+                                  duration:SHADOWVIEW_TIME
+                                   options:UIViewAnimationOptionCurveEaseInOut
+                                animations:^{
+                                    shadowView.alpha = 0.5f;
+                                } completion:^(BOOL finished) {
+                                }];
+            }
             [self addBubble:@"bubble_1" atCenter:bubbleCenter withAdImage:ad];
         }
     });
