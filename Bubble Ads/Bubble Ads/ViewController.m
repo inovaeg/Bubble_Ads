@@ -11,23 +11,10 @@
 
 @implementation ViewController
 
-
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-//    [AdBubbleHelper presentBubblesViewOnView:self.sceneView];
-}
-
--(void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.view.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.view.layer.shadowOpacity = 0.4;
-    self.view.layer.shadowRadius = 20.0;
-    self.view.layer.shadowOffset = self.view.layer.frame.size;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Put this method inside your ViewDidLoad method
     [AdBubbleHelper startWithView:self.sceneView];
 }
 
@@ -35,15 +22,6 @@
 {
     return YES;
 }
-
-//- (NSUInteger)supportedInterfaceOrientations
-//{
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        return UIInterfaceOrientationMaskAllButUpsideDown;
-//    } else {
-//        return UIInterfaceOrientationMaskLandscape;
-//    }
-//}
 
 - (void)didReceiveMemoryWarning
 {

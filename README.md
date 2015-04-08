@@ -2,7 +2,6 @@
 
 Is a native iOS library to display animated floating Ads inside iOS apps and game. The library deliver Ads from [Avocarrot](http://www.avocarrot.com/) Ad network.
 
-
 ##Components
 
 The library components
@@ -16,12 +15,11 @@ Sample code for testing
 
 The **ViewController** should present AdBubbleScene.
 
-
 ##Code Example
 
 Request presenting Ads on top of your view.
 
-    [AdBubbleHelper presentBubblesViewOnView:self.sceneView];
+        [AdBubbleHelper startWithView:self.sceneView];
 
 ##Motivation
 
@@ -46,7 +44,7 @@ You will need the following classes:
 2. **AdBubbleHelper**
 3. **Adding SkView on top of your view**
 
-Also adding resource file `sprites.atlas` to the project
+Also adding resource file `Bubble Assets` to the project
 and then:
 
 * In your ViewController Request presenting Ads.
@@ -70,7 +68,7 @@ The view controller that will present Ads should have a `SKView` on it's subview
 
 #pragma mark - view parameters:
 // a view that hold Ads Bubbles.
-@property (nonatomic, retain) IBOutlet SKView * sceneView;
+@property (nonatomic, strong) IBOutlet SKView * sceneView;
 
 @end
 ```
@@ -79,19 +77,18 @@ The view controller that will present Ads should have a `SKView` on it's subview
 
 There is a class called **ViewController**, here you can test or use our library.
 
-The class contains one method:
-
-* **-(void) viewWillLayoutSubviews;**
-
-
-`-(void) viewWillLayoutSubviews` method here you request displaying bubble Ads.
-
+You should import:
+ `#import "AdBubbleHelper.h"`
+ 
+ Then call `[AdBubbleHelper startWithView:self.sceneView];` inside `-(void) viewDidLoad` method here you to start
+ displaying Bubble Ads.
 
 ##Contributor list
 
 1. [Inova Team](http://www.inovaeg.co/) 
 2. [Kareem Ahmed](https://www.facebook.com/profile.php?id=641156392)
 3. [Temon](https://www.behance.net/temon_art_design)
+4. [Amr](https://www.linkedin.com/in/amralassal)
 
 ##Contribution guidelines
 

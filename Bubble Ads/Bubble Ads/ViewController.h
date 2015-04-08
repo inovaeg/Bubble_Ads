@@ -11,5 +11,6 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet SKView * sceneView;
+@property (nonatomic, strong) IBOutlet SKView * sceneView;
+
 @end
