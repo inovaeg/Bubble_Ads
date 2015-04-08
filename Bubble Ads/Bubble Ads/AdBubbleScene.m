@@ -157,7 +157,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     shadowView.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
     shadowView.backgroundColor = [UIColor blackColor];
     shadowView.alpha = 0.0f;
-    [self.view addSubview:shadowView];// Code to run after animation
+    [[self.view superview] insertSubview:shadowView belowSubview:self.view];// Code to run after animation
 }
 
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
