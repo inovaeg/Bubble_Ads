@@ -7,11 +7,14 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "AdFactory.h"
 
 @interface AdBubbleScene : SKScene
 {
     SKTextureAtlas *atlas;
 }
 
--(void)updateBubbleLocationsAndPhysicalBodyWithFrameRect:(CGRect)rect;
+-(void)createBubbleWithAd:(AdFactory*) ad;
+-(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withAd:(AdFactory *)ad;
+
 @end

@@ -7,18 +7,17 @@
 //
 
 #import "AdBubbleScene.h"
-#import <AvocarrotSDK/AvocarrotCustom.h>
 #import "BubbleSpritesHeader.h"
+#import "AdsManager.h"
 
+#define AD_DIC_KEY @"adObject"
 #define AVOCARROT_AD_DIC_KEY @"adObject"
+#define INMOBI_AD_DIC_KEY @"adObject"
 
 #define BUBBLE_NODE_NAME @"BubbleNode"
 #define AD_NODE_NAME @"AdNode"
 
 #define ADS_IMAGE_PADDING 45
-
-#define AVOCARROT_API_KEY   @"d2d4f6a7a99471027143e8bf17138c054ccb5786"
-#define AVOCARROT_PLACEMENT @"d8847579caad3a624970f179d50b2d9e77ec9d14"
 
 #define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.07
 #define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 36
@@ -29,6 +28,7 @@
 #define BUBBLE_COLLISION_ANIMATION_FRAME_TIME 0.05
 #define BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT 10
 
+//#define BUBBLE_RADIUS 160
 #define BUBBLE_SPEED 30
 #define BUBBLES_COUNT 5
 #define BUBBLES_NEW_ANGLE_DIFF 70 // angle difference between new and old bubble velocity
@@ -39,7 +39,7 @@
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-@interface AdBubbleScene() <SKPhysicsContactDelegate,AVCustomAdDelegate>
+@interface AdBubbleScene() <SKPhysicsContactDelegate>
 {
     UIView* shadowView;
     UIDeviceOrientation currentOrientation;
@@ -112,8 +112,9 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
         self.physicsBody.usesPreciseCollisionDetection = YES;
         
+        [[AdsManager sharedManager] attachScene:self];
         for(NSInteger i = 0 ; i < self.bubblesCount; i++){
-            [self requestAd];
+            [[AdsManager sharedManager] requestAd];
         }
         
         //Listen on Orientation
@@ -162,6 +163,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
     
+//    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:BUBBLE_RADIUS];
     node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30)/2];
     node.physicsBody.dynamic = YES;
     node.physicsBody.usesPreciseCollisionDetection = YES;
@@ -176,21 +178,20 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)applyBubbleAnimationToBubble:(SKSpriteNode *)bubble{
     
-//    SKTextureAtlas * atlas = [SKTextureAtlas atlasNamed:@"sprites"];
+//    SKTextureAtlas * atlasBubble = [SKTextureAtlas atlasNamed:@"spritesBubbleMovement"];
 //    
 //    NSMutableArray * animatedBubbleTextureArray = [[NSMutableArray alloc] init];
-//    for(NSInteger i = 1; i <= 9 /*NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT*/ ; i++){
-//        NSString * imageName = [NSString stringWithFormat:@"bubble_%ld.png",(long)i];
-//        SKTexture * texture = [atlas textureNamed:imageName];
+//    for(NSInteger i = 0; i < 60; i++){
+//        NSString * imageName = [NSString stringWithFormat:@"%ld.png",(long)i];
+//        SKTexture * texture = [atlasBubble textureNamed:imageName];
 //        [animatedBubbleTextureArray addObject:texture];
 //    }
 //    
-//    SKAction * runAnimation = [SKAction animateWithTextures:animatedBubbleTextureArray timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
+//    SKAction * runAnimation = [SKAction animateWithTextures:animatedBubbleTextureArray timePerFrame:(4.0f/60.0f) resize:NO restore:NO];
 //    [bubble runAction:[SKAction repeatActionForever:runAnimation]];
 
     SKAction * runAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE timePerFrame:NORMAL_BUBBLE_ANIMATION_FRAME_TIME resize:NO restore:NO];
     [bubble runAction:[SKAction repeatActionForever:runAnimation]];
-//    [bubble runAction:runAnimation ];
 }
 
 +(UIImage *)getCircleImage:(UIImage *)image withRadius:(CGFloat)radius{
@@ -227,7 +228,32 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     [bubble addChild:adNode];
     return adNode;
 }
--(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withAdImage:(AVCustomAd *)ad{
+
+//-(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withInMobiAd:(IMNative*)ad{
+//    
+//    SKSpriteNode * bubbleNode= [self addBubble:bubbleImageName atCenter:center withImage:[[AdsManager sharedManager] loadInMobiAd] ];
+//    [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[INMOBI_AD_DIC_KEY]]];
+//    
+//    return bubbleNode;
+//}
+//
+//-(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withAvocarrotAd:(AVCustomAd *)ad{
+//    
+//    SKSpriteNode * bubbleNode= [self addBubble:bubbleImageName atCenter:center withImage:[ad getImage]];
+//    [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[AVOCARROT_AD_DIC_KEY]]];
+//    
+//    return bubbleNode;
+//}
+
+-(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withAd:(AdFactory*)ad{
+
+    SKSpriteNode * bubbleNode= [self addBubble:bubbleImageName atCenter:center withImage:[ad getImage] ];
+    [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[AD_DIC_KEY]]];
+
+    return bubbleNode;
+}
+
+-(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withImage:(UIImage *)image{
     
     SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
     bubbleNode.name = BUBBLE_NODE_NAME;
@@ -235,14 +261,11 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     bubbleNode.alpha = 0.0f;
     [self applyBubbleProperties:bubbleNode];
     [self addChild:bubbleNode];
-    SKSpriteNode * adNode= [self addAdImage:[ad getImage] toBubble:bubbleNode];
+    SKSpriteNode * adNode= [self addAdImage:image toBubble:bubbleNode];
     [self.bubblesArray addObject:bubbleNode];
     [self applyBubbleAnimationToBubble:bubbleNode];
     SKAction *fadeIn = [SKAction fadeInWithDuration:BUBBLE_FADEIN_TIME];
     [bubbleNode runAction:fadeIn];
-    
-    [bubbleNode setUserData:[[NSMutableDictionary alloc] initWithObjects:@[ad] forKeys:@[AVOCARROT_AD_DIC_KEY]]];
-    
     
     adNode.zPosition = -3;
     bubbleNode.zPosition = -2;
@@ -259,17 +282,32 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     return adNode;
 }
 
--(SKSpriteNode *)createBubble{
-    
-    NSString * bubbleImageName = @"bubble_1.png";
-    SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
-    NSLog(@"[%f][%f]",bubbleNode.size.width,bubbleNode.size.height);
-    bubbleNode.name = BUBBLE_NODE_NAME;
-    [self applyBubbleProperties:bubbleNode];
-    [self applyBubbleAnimationToBubble:bubbleNode];
-    
-    return bubbleNode;
+-(void)createBubbleWithAd:(AdFactory*) ad{
+    CGPoint bubbleCenter = [self geRandomPointAtScreenBoundriesForBubbleSize:CGSizeMake(250, 250)];
+    if(shadowView == nil){
+        [self castShadowLayer];
+        [UIView transitionWithView:self.view
+                          duration:SHADOWVIEW_TIME
+                           options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^{
+                            shadowView.alpha = 0.5f;
+                        } completion:^(BOOL finished) {
+                        }];
+    }
+    [self addBubble:@"bubble_1" atCenter:bubbleCenter withAd:ad];
 }
+
+//-(SKSpriteNode *)createBubble{
+//
+//    NSString * bubbleImageName = @"bubble_1.png";
+//    SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
+//    NSLog(@"[%f][%f]",bubbleNode.size.width,bubbleNode.size.height);
+//    bubbleNode.name = BUBBLE_NODE_NAME;
+//    [self applyBubbleProperties:bubbleNode];
+//    [self applyBubbleAnimationToBubble:bubbleNode];
+//    
+//    return bubbleNode;
+//}
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
@@ -454,8 +492,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 //    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleExplosionTextureArray timePerFrame:BUBBLE_EXPLOSION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
     SKAction * actionOpenAd = [SKAction runBlock:^{
-        AVCustomAd * ad = [bubble.userData objectForKey:AVOCARROT_AD_DIC_KEY];
-        [self openAd:ad];
+        AdFactory * ad = [bubble.userData objectForKey:AD_DIC_KEY];
+        [ad openWithView:self.view];
+//        AVCustomAd * ad = [bubble.userData objectForKey:AVOCARROT_AD_DIC_KEY];
+//        [self openAd:ad];
+//        IMNative * ad = [bubble.userData objectForKey:INMOBI_AD_DIC_KEY];
+//        [ad attachToView:self.view];
+//        [ad handleClick:nil];
     }];
     [bubble runAction:[SKAction sequence:[NSArray arrayWithObjects:actionAnimation, actionOpenAd,actionMoveDone, nil]]];
 }
@@ -492,60 +535,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     
     [self applyBubbleCollisionAnimationToBubble:bubbleNode1];
     [self applyBubbleCollisionAnimationToBubble:bubbleNode2];
-}
-
--(void)requestAd{
-    AvocarrotCustom *myAd = [[AvocarrotCustom alloc] init];
-    [myAd setApiKey: AVOCARROT_API_KEY];
-    [myAd setSandbox:NO];
-    [myAd setLogger:NO withLevel:@"ALL"];
-    [myAd loadAdForPlacement: AVOCARROT_PLACEMENT];
-    [myAd setDelegate:self];
-}
-
--(void) adDidNotLoad:(NSString *)reason{
-    NSLog(@"adDidNotLoad reason : %@",reason);
-}
-
--(void) adDidFailToLoad:(NSError *)error{
-    NSLog(@"adDidFailToLoad error: %@",error);
-}
--(void) adDidLoad:(AVCustomAd *)ad {
-    NSLog(@"adDidLoad");
-    
-    // Bind ad to a UIView
-    [ad bindToView:self.view];
-    
-    dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^(void){
-        // Get Ad Image
-        if (([ad getImageHeight]>0) && ([ad getImageWidth]>0) && ([ad getImage] != nil)){
-            CGPoint bubbleCenter = [self geRandomPointAtScreenBoundriesForBubbleSize:CGSizeMake(250, 250)];
-            if(shadowView == nil){
-                [self castShadowLayer];
-                [UIView transitionWithView:self.view
-                                  duration:SHADOWVIEW_TIME
-                                   options:UIViewAnimationOptionCurveEaseInOut
-                                animations:^{
-                                    shadowView.alpha = 0.5f;
-                                } completion:^(BOOL finished) {
-                                }];
-            }
-            [self addBubble:@"bubble_1" atCenter:bubbleCenter withAdImage:ad];
-        }
-    });
-}
-
--(void)onAdClick:(NSString *)message{
-//    NSLog(@"onAdClick message %@: ",message);
-}
-
-- (void) onAdImpression: (NSString *) message{
-//    NSLog(@"onAdImpression message %@: ",message);
-}
-
--(void) userWillLeaveApp{
-//    NSLog(@"userWillLeaveApp");
-    
 }
 
 -(void) dealloc{

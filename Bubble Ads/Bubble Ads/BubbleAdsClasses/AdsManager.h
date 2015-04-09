@@ -7,18 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AvocarrotSDK/AvocarrotCustom.h>
 
 #import "InMobi.h"
 #import "IMNative.h"
 #import "IMConstants.h"
+#import "AdBubbleScene.h"
 #import "IMNativeDelegate.h"
 
-@interface AdsManager : NSObject <IMNativeDelegate>
+@interface AdsManager : NSObject <IMNativeDelegate, AVCustomAdDelegate>
 
 @property (nonatomic, strong) IMNative* nativeAd;
 @property (nonatomic, strong) NSString* nativeContent;
 
 + (id)sharedManager;
+
+-(void)requestAd;
 -(void)startInMobi;
+-(void)attachScene:(AdBubbleScene*) scene;
 
 @end

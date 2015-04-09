@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21750B301AB837F000F9E485 /* AdBubbleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21750B2F1AB837F000F9E485 /* AdBubbleHelper.m */; };
 		21CEE3221AB773BE005E285A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3211AB773BE005E285A /* main.m */; };
 		21CEE3251AB773BE005E285A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3241AB773BE005E285A /* AppDelegate.m */; };
-		21CEE3281AB773BE005E285A /* AdBubbleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE3271AB773BE005E285A /* AdBubbleScene.m */; };
 		21CEE32A1AB773BE005E285A /* AdBubbleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 21CEE3291AB773BE005E285A /* AdBubbleScene.sks */; };
 		21CEE32D1AB773BE005E285A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEE32C1AB773BE005E285A /* ViewController.m */; };
 		21CEE3301AB773BE005E285A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CEE32E1AB773BE005E285A /* Main.storyboard */; };
@@ -34,13 +32,19 @@
 		2FBAB2461AD5A09F00173FB2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBAB2451AD5A09F00173FB2 /* StoreKit.framework */; };
 		2FBAB2481AD5A0B200173FB2 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBAB2471AD5A0B200173FB2 /* libsqlite3.0.dylib */; };
 		2FBAB24A1AD5A0B900173FB2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBAB2491AD5A0B900173FB2 /* libz.dylib */; };
-		2FBAB24D1AD5A1B700173FB2 /* AdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBAB24C1AD5A1B700173FB2 /* AdsManager.m */; };
-		2FC61A171AD2A8A400A14CE1 /* sprites.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC61A151AD2A8A400A14CE1 /* sprites.1.png */; };
-		2FC61A181AD2A8A400A14CE1 /* sprites.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC61A151AD2A8A400A14CE1 /* sprites.1.png */; };
-		2FC61A191AD2A8A400A14CE1 /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FC61A161AD2A8A400A14CE1 /* sprites.plist */; };
-		2FC61A1A1AD2A8A400A14CE1 /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FC61A161AD2A8A400A14CE1 /* sprites.plist */; };
 		2FC6E91B1AD6AFEB00F8831D /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC6E91A1AD6AFEB00F8831D /* AvocarrotSDK.framework */; };
 		2FC6E9291AD6B16500F8831D /* libInMobi-4.5.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC6E9281AD6B16500F8831D /* libInMobi-4.5.1.a */; };
+		2FC6E93F1AD6D20700F8831D /* IMGlobalImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E93C1AD6D20700F8831D /* IMGlobalImageCache.m */; };
+		2FC6E9401AD6D20700F8831D /* IMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E93E1AD6D20700F8831D /* IMUtilities.m */; };
+		2FC6E9481AD6E9BD00F8831D /* AdBubbleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9431AD6E9BD00F8831D /* AdBubbleHelper.m */; };
+		2FC6E9491AD6E9BD00F8831D /* AdBubbleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9451AD6E9BD00F8831D /* AdBubbleScene.m */; };
+		2FC6E94A1AD6E9BD00F8831D /* AdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9471AD6E9BD00F8831D /* AdsManager.m */; };
+		2FC6E9511AD6F17E00F8831D /* AdFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9501AD6F17E00F8831D /* AdFactory.m */; };
+		2FC6E95A1AD6F90700F8831D /* sprites.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC6E9581AD6F90700F8831D /* sprites.1.png */; };
+		2FC6E95B1AD6F90700F8831D /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FC6E9591AD6F90700F8831D /* sprites.plist */; };
+		2FC6E95D1AD6F9DF00F8831D /* spritesBubbleMovement.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2FC6E95C1AD6F9DF00F8831D /* spritesBubbleMovement.atlas */; };
+		2FC6E9601AD7077200F8831D /* AdAvocarrot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E95F1AD7077200F8831D /* AdAvocarrot.m */; };
+		2FC6E9631AD7079200F8831D /* AdInMobi.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9621AD7079200F8831D /* AdInMobi.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,15 +58,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21750B2E1AB837F000F9E485 /* AdBubbleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleHelper.h; sourceTree = "<group>"; };
-		21750B2F1AB837F000F9E485 /* AdBubbleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBubbleHelper.m; sourceTree = "<group>"; };
 		21CEE31C1AB773BE005E285A /* Bubble Ads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bubble Ads.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CEE3201AB773BE005E285A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21CEE3211AB773BE005E285A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		21CEE3231AB773BE005E285A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21CEE3241AB773BE005E285A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		21CEE3261AB773BE005E285A /* AdBubbleScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdBubbleScene.h; sourceTree = "<group>"; };
-		21CEE3271AB773BE005E285A /* AdBubbleScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdBubbleScene.m; sourceTree = "<group>"; };
 		21CEE3291AB773BE005E285A /* AdBubbleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AdBubbleScene.sks; sourceTree = "<group>"; };
 		21CEE32B1AB773BE005E285A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		21CEE32C1AB773BE005E285A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -89,11 +89,6 @@
 		2FBAB2451AD5A09F00173FB2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2FBAB2471AD5A0B200173FB2 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		2FBAB2491AD5A0B900173FB2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		2FBAB24B1AD5A1B700173FB2 /* AdsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsManager.h; sourceTree = "<group>"; };
-		2FBAB24C1AD5A1B700173FB2 /* AdsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsManager.m; sourceTree = "<group>"; };
-		2FC61A131AD2A8A400A14CE1 /* BubbleSpritesHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleSpritesHeader.h; sourceTree = "<group>"; };
-		2FC61A151AD2A8A400A14CE1 /* sprites.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.1.png; sourceTree = "<group>"; };
-		2FC61A161AD2A8A400A14CE1 /* sprites.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sprites.plist; sourceTree = "<group>"; };
 		2FC6E91A1AD6AFEB00F8831D /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AvocarrotSDK.framework; path = Frameworks/AvocarrotSDK.framework; sourceTree = "<group>"; };
 		2FC6E91D1AD6B16400F8831D /* IMBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMBanner.h; sourceTree = "<group>"; };
 		2FC6E91E1AD6B16400F8831D /* IMBannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMBannerDelegate.h; sourceTree = "<group>"; };
@@ -107,6 +102,26 @@
 		2FC6E9261AD6B16500F8831D /* InMobi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InMobi.h; sourceTree = "<group>"; };
 		2FC6E9271AD6B16500F8831D /* InMobiAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InMobiAnalytics.h; sourceTree = "<group>"; };
 		2FC6E9281AD6B16500F8831D /* libInMobi-4.5.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobi-4.5.1.a"; sourceTree = "<group>"; };
+		2FC6E93B1AD6D20700F8831D /* IMGlobalImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGlobalImageCache.h; sourceTree = "<group>"; };
+		2FC6E93C1AD6D20700F8831D /* IMGlobalImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGlobalImageCache.m; sourceTree = "<group>"; };
+		2FC6E93D1AD6D20700F8831D /* IMUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMUtilities.h; sourceTree = "<group>"; };
+		2FC6E93E1AD6D20700F8831D /* IMUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMUtilities.m; sourceTree = "<group>"; };
+		2FC6E9421AD6E9BD00F8831D /* AdBubbleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleHelper.h; sourceTree = "<group>"; };
+		2FC6E9431AD6E9BD00F8831D /* AdBubbleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBubbleHelper.m; sourceTree = "<group>"; };
+		2FC6E9441AD6E9BD00F8831D /* AdBubbleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleScene.h; sourceTree = "<group>"; };
+		2FC6E9451AD6E9BD00F8831D /* AdBubbleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBubbleScene.m; sourceTree = "<group>"; };
+		2FC6E9461AD6E9BD00F8831D /* AdsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsManager.h; sourceTree = "<group>"; };
+		2FC6E9471AD6E9BD00F8831D /* AdsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsManager.m; sourceTree = "<group>"; };
+		2FC6E94F1AD6F17E00F8831D /* AdFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdFactory.h; sourceTree = "<group>"; };
+		2FC6E9501AD6F17E00F8831D /* AdFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdFactory.m; sourceTree = "<group>"; };
+		2FC6E9561AD6F90700F8831D /* BubbleSpritesHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleSpritesHeader.h; sourceTree = "<group>"; };
+		2FC6E9581AD6F90700F8831D /* sprites.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.1.png; sourceTree = "<group>"; };
+		2FC6E9591AD6F90700F8831D /* sprites.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sprites.plist; sourceTree = "<group>"; };
+		2FC6E95C1AD6F9DF00F8831D /* spritesBubbleMovement.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = spritesBubbleMovement.atlas; sourceTree = "<group>"; };
+		2FC6E95E1AD7077200F8831D /* AdAvocarrot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdAvocarrot.h; sourceTree = "<group>"; };
+		2FC6E95F1AD7077200F8831D /* AdAvocarrot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdAvocarrot.m; sourceTree = "<group>"; };
+		2FC6E9611AD7079200F8831D /* AdInMobi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInMobi.h; sourceTree = "<group>"; };
+		2FC6E9621AD7079200F8831D /* AdInMobi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdInMobi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,15 +213,10 @@
 		21CEE31E1AB773BE005E285A /* Bubble Ads */ = {
 			isa = PBXGroup;
 			children = (
+				2FC6E9551AD6F90700F8831D /* Bubble Assets */,
+				2FC6E9411AD6E9BD00F8831D /* BubbleAdsClasses */,
 				2FC6E91C1AD6B16400F8831D /* In_Mobi_Libs */,
-				2FBAB24B1AD5A1B700173FB2 /* AdsManager.h */,
-				2FBAB24C1AD5A1B700173FB2 /* AdsManager.m */,
-				2FC61A121AD2A8A400A14CE1 /* Bubble Assets */,
 				21750B371AB8B77100F9E485 /* AdBubblesResources */,
-				21750B2E1AB837F000F9E485 /* AdBubbleHelper.h */,
-				21750B2F1AB837F000F9E485 /* AdBubbleHelper.m */,
-				21CEE3261AB773BE005E285A /* AdBubbleScene.h */,
-				21CEE3271AB773BE005E285A /* AdBubbleScene.m */,
 				21CEE3291AB773BE005E285A /* AdBubbleScene.sks */,
 				21CEE3231AB773BE005E285A /* AppDelegate.h */,
 				21CEE3241AB773BE005E285A /* AppDelegate.m */,
@@ -247,27 +257,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2FC61A121AD2A8A400A14CE1 /* Bubble Assets */ = {
-			isa = PBXGroup;
-			children = (
-				2FC61A131AD2A8A400A14CE1 /* BubbleSpritesHeader.h */,
-				2FC61A141AD2A8A400A14CE1 /* sprites.atlasc */,
-			);
-			path = "Bubble Assets";
-			sourceTree = "<group>";
-		};
-		2FC61A141AD2A8A400A14CE1 /* sprites.atlasc */ = {
-			isa = PBXGroup;
-			children = (
-				2FC61A151AD2A8A400A14CE1 /* sprites.1.png */,
-				2FC61A161AD2A8A400A14CE1 /* sprites.plist */,
-			);
-			path = sprites.atlasc;
-			sourceTree = "<group>";
-		};
 		2FC6E91C1AD6B16400F8831D /* In_Mobi_Libs */ = {
 			isa = PBXGroup;
 			children = (
+				2FC6E93A1AD6D20700F8831D /* IMUtilities */,
 				2FC6E91D1AD6B16400F8831D /* IMBanner.h */,
 				2FC6E91E1AD6B16400F8831D /* IMBannerDelegate.h */,
 				2FC6E91F1AD6B16400F8831D /* IMConstants.h */,
@@ -282,6 +275,63 @@
 				2FC6E9281AD6B16500F8831D /* libInMobi-4.5.1.a */,
 			);
 			path = In_Mobi_Libs;
+			sourceTree = "<group>";
+		};
+		2FC6E93A1AD6D20700F8831D /* IMUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6E93B1AD6D20700F8831D /* IMGlobalImageCache.h */,
+				2FC6E93C1AD6D20700F8831D /* IMGlobalImageCache.m */,
+				2FC6E93D1AD6D20700F8831D /* IMUtilities.h */,
+				2FC6E93E1AD6D20700F8831D /* IMUtilities.m */,
+			);
+			path = IMUtilities;
+			sourceTree = "<group>";
+		};
+		2FC6E9411AD6E9BD00F8831D /* BubbleAdsClasses */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6E94E1AD6F17E00F8831D /* AdFactory */,
+				2FC6E9421AD6E9BD00F8831D /* AdBubbleHelper.h */,
+				2FC6E9431AD6E9BD00F8831D /* AdBubbleHelper.m */,
+				2FC6E9441AD6E9BD00F8831D /* AdBubbleScene.h */,
+				2FC6E9451AD6E9BD00F8831D /* AdBubbleScene.m */,
+				2FC6E9461AD6E9BD00F8831D /* AdsManager.h */,
+				2FC6E9471AD6E9BD00F8831D /* AdsManager.m */,
+			);
+			path = BubbleAdsClasses;
+			sourceTree = "<group>";
+		};
+		2FC6E94E1AD6F17E00F8831D /* AdFactory */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6E94F1AD6F17E00F8831D /* AdFactory.h */,
+				2FC6E9501AD6F17E00F8831D /* AdFactory.m */,
+				2FC6E95E1AD7077200F8831D /* AdAvocarrot.h */,
+				2FC6E95F1AD7077200F8831D /* AdAvocarrot.m */,
+				2FC6E9611AD7079200F8831D /* AdInMobi.h */,
+				2FC6E9621AD7079200F8831D /* AdInMobi.m */,
+			);
+			path = AdFactory;
+			sourceTree = "<group>";
+		};
+		2FC6E9551AD6F90700F8831D /* Bubble Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6E95C1AD6F9DF00F8831D /* spritesBubbleMovement.atlas */,
+				2FC6E9561AD6F90700F8831D /* BubbleSpritesHeader.h */,
+				2FC6E9571AD6F90700F8831D /* sprites.atlasc */,
+			);
+			path = "Bubble Assets";
+			sourceTree = "<group>";
+		};
+		2FC6E9571AD6F90700F8831D /* sprites.atlasc */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6E9581AD6F90700F8831D /* sprites.1.png */,
+				2FC6E9591AD6F90700F8831D /* sprites.plist */,
+			);
+			path = sprites.atlasc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,12 +415,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				21CEE3351AB773BF005E285A /* LaunchScreen.xib in Resources */,
-				2FC61A191AD2A8A400A14CE1 /* sprites.plist in Resources */,
+				2FC6E95B1AD6F90700F8831D /* sprites.plist in Resources */,
+				2FC6E95A1AD6F90700F8831D /* sprites.1.png in Resources */,
 				21CEE3321AB773BF005E285A /* Images.xcassets in Resources */,
-				2FC61A171AD2A8A400A14CE1 /* sprites.1.png in Resources */,
 				21CEE32A1AB773BE005E285A /* AdBubbleScene.sks in Resources */,
 				21CEE3301AB773BE005E285A /* Main.storyboard in Resources */,
 				2FBAB14F1AD5751800173FB2 /* bubbles_background.jpg in Resources */,
+				2FC6E95D1AD6F9DF00F8831D /* spritesBubbleMovement.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,8 +429,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FC61A181AD2A8A400A14CE1 /* sprites.1.png in Resources */,
-				2FC61A1A1AD2A8A400A14CE1 /* sprites.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,11 +439,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FBAB24D1AD5A1B700173FB2 /* AdsManager.m in Sources */,
+				2FC6E9491AD6E9BD00F8831D /* AdBubbleScene.m in Sources */,
+				2FC6E9481AD6E9BD00F8831D /* AdBubbleHelper.m in Sources */,
+				2FC6E9601AD7077200F8831D /* AdAvocarrot.m in Sources */,
+				2FC6E94A1AD6E9BD00F8831D /* AdsManager.m in Sources */,
+				2FC6E9511AD6F17E00F8831D /* AdFactory.m in Sources */,
 				21CEE32D1AB773BE005E285A /* ViewController.m in Sources */,
+				2FC6E9631AD7079200F8831D /* AdInMobi.m in Sources */,
+				2FC6E9401AD6D20700F8831D /* IMUtilities.m in Sources */,
 				21CEE3251AB773BE005E285A /* AppDelegate.m in Sources */,
-				21750B301AB837F000F9E485 /* AdBubbleHelper.m in Sources */,
-				21CEE3281AB773BE005E285A /* AdBubbleScene.m in Sources */,
+				2FC6E93F1AD6D20700F8831D /* IMGlobalImageCache.m in Sources */,
 				21CEE3221AB773BE005E285A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
