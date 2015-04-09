@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AdsManager : NSObject
+#import "InMobi.h"
+#import "IMNative.h"
+#import "IMConstants.h"
+#import "IMNativeDelegate.h"
+
+@interface AdsManager : NSObject <IMNativeDelegate>
+
+@property (nonatomic, strong) IMNative* nativeAd;
+@property (nonatomic, strong) NSString* nativeContent;
+
++ (id)sharedManager;
+-(void)startInMobi;
 
 @end
