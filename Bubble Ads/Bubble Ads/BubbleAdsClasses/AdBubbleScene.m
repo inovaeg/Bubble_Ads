@@ -194,16 +194,35 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 //    [bubble runAction:[SKAction repeatActionForever:runAnimation]];
 }
 
-+(UIImage *)getCircleImage:(UIImage *)image withRadius:(CGFloat)radius{
+-(UIImage *)getCircleImage:(UIImage *)image withRadius:(CGFloat)radius{
     
     // create the image with rounded corners
     CGFloat diameter = radius * 2;
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(diameter,diameter), NO, 0);
+//    CGRect rect = CGRectMake(0, 0, diameter, diameter);
+//    [[UIColor whiteColor] setStroke];
+//    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius];
+//    [path addClip];
+//    [image drawInRect:rect];
+//    UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.frame = CGRectMake(0, 0, diameter, diameter);
+    imageLayer.contents = (id) image.CGImage;
+    
+    imageLayer.backgroundColor=[[UIColor clearColor] CGColor];
+    imageLayer.cornerRadius = radius;
+    imageLayer.borderWidth = 1.5f;
+    imageLayer.masksToBounds = YES;
+    imageLayer.borderColor=[[UIColor whiteColor] CGColor];
+    
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(diameter,diameter), NO, 0);
-    CGRect rect = CGRectMake(0, 0, diameter, diameter);
-    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
-    [image drawInRect:rect];
+    [imageLayer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    return roundedImage;
     
     return roundedImage;
 }
@@ -218,7 +237,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     }
     
     CGFloat newImageSize = minSize - adImagePadding*2;
-    UIImage * circleAdImage = [AdBubbleScene getCircleImage:adImage withRadius:newImageSize/2];
+    UIImage * circleAdImage = [self getCircleImage:adImage withRadius:newImageSize/2];
     SKTexture * adTexture = [SKTexture textureWithImage:circleAdImage];
     
     SKSpriteNode * adNode = [SKSpriteNode spriteNodeWithTexture:adTexture size:CGSizeMake( bubble.size.width - adImagePadding*2 , bubble.size.height -adImagePadding*2)];
@@ -493,13 +512,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     //[bubble removeAllActions];
     SKTextureAtlas * spriteAtlas = [SKTextureAtlas atlasNamed:@"spritesBubble"];
     NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
-    for(NSInteger i = 0; i <= 16 /*BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT*/ ; i++){
+    for(NSInteger i = 0; i <= 26 /*BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT*/ ; i++){
         NSString * imageName = [NSString stringWithFormat:@"collision_%ld.png",(long)i];
         SKTexture * texture = [spriteAtlas textureNamed:imageName];
         [animatedBubbleCollisionTextureArray addObject:texture];
     }
     
-    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:(0.6f/17.0f) /*BUBBLE_COLLISION_ANIMATION_FRAME_TIME*/ resize:NO restore:NO];
+    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:(0.6f/26.0f) /*BUBBLE_COLLISION_ANIMATION_FRAME_TIME*/ resize:NO restore:NO];
 //    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION2 timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
     [bubble runAction:[SKAction repeatAction:actionAnimation count:1] completion:^{ // count:2
