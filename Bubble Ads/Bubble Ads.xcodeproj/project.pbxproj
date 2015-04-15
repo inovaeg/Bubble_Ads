@@ -40,14 +40,14 @@
 		2FBD65E41ADD45D6002DE892 /* IMUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD65DD1ADD45D6002DE892 /* IMUtilities.m */; };
 		2FBD65E51ADD45D6002DE892 /* libInMobi-4.5.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBD65E01ADD45D6002DE892 /* libInMobi-4.5.1.a */; };
 		2FBD65E61ADD45D6002DE892 /* libInMobi-4.5.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBD65E01ADD45D6002DE892 /* libInMobi-4.5.1.a */; };
-		2FBD65E81ADD46CA002DE892 /* spritesBubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD65E71ADD46CA002DE892 /* spritesBubble.atlas */; };
-		2FBD65E91ADD46CA002DE892 /* spritesBubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD65E71ADD46CA002DE892 /* spritesBubble.atlas */; };
+		2FC2BEDB1ADF01880004F6DA /* spritesBubble.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC2BED71ADF01880004F6DA /* spritesBubble.1.png */; };
+		2FC2BEDC1ADF01880004F6DA /* spritesBubble.2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC2BED81ADF01880004F6DA /* spritesBubble.2.png */; };
+		2FC2BEDD1ADF01880004F6DA /* spritesBubble.3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC2BED91ADF01880004F6DA /* spritesBubble.3.png */; };
+		2FC2BEDE1ADF01880004F6DA /* spritesBubble.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FC2BEDA1ADF01880004F6DA /* spritesBubble.plist */; };
 		2FC6E9481AD6E9BD00F8831D /* AdBubbleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9431AD6E9BD00F8831D /* AdBubbleHelper.m */; };
 		2FC6E9491AD6E9BD00F8831D /* AdBubbleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9451AD6E9BD00F8831D /* AdBubbleScene.m */; };
 		2FC6E94A1AD6E9BD00F8831D /* AdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9471AD6E9BD00F8831D /* AdsManager.m */; };
 		2FC6E9511AD6F17E00F8831D /* AdFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9501AD6F17E00F8831D /* AdFactory.m */; };
-		2FC6E95A1AD6F90700F8831D /* sprites.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC6E9581AD6F90700F8831D /* sprites.1.png */; };
-		2FC6E95B1AD6F90700F8831D /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FC6E9591AD6F90700F8831D /* sprites.plist */; };
 		2FC6E9601AD7077200F8831D /* AdAvocarrot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E95F1AD7077200F8831D /* AdAvocarrot.m */; };
 		2FC6E9631AD7079200F8831D /* AdInMobi.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6E9621AD7079200F8831D /* AdInMobi.m */; };
 /* End PBXBuildFile section */
@@ -111,7 +111,10 @@
 		2FBD65DE1ADD45D6002DE892 /* InMobi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InMobi.h; sourceTree = "<group>"; };
 		2FBD65DF1ADD45D6002DE892 /* InMobiAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InMobiAnalytics.h; sourceTree = "<group>"; };
 		2FBD65E01ADD45D6002DE892 /* libInMobi-4.5.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobi-4.5.1.a"; sourceTree = "<group>"; };
-		2FBD65E71ADD46CA002DE892 /* spritesBubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = spritesBubble.atlas; sourceTree = "<group>"; };
+		2FC2BED71ADF01880004F6DA /* spritesBubble.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spritesBubble.1.png; sourceTree = "<group>"; };
+		2FC2BED81ADF01880004F6DA /* spritesBubble.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spritesBubble.2.png; sourceTree = "<group>"; };
+		2FC2BED91ADF01880004F6DA /* spritesBubble.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spritesBubble.3.png; sourceTree = "<group>"; };
+		2FC2BEDA1ADF01880004F6DA /* spritesBubble.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = spritesBubble.plist; sourceTree = "<group>"; };
 		2FC6E9421AD6E9BD00F8831D /* AdBubbleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleHelper.h; sourceTree = "<group>"; };
 		2FC6E9431AD6E9BD00F8831D /* AdBubbleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBubbleHelper.m; sourceTree = "<group>"; };
 		2FC6E9441AD6E9BD00F8831D /* AdBubbleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBubbleScene.h; sourceTree = "<group>"; };
@@ -120,9 +123,6 @@
 		2FC6E9471AD6E9BD00F8831D /* AdsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsManager.m; sourceTree = "<group>"; };
 		2FC6E94F1AD6F17E00F8831D /* AdFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdFactory.h; sourceTree = "<group>"; };
 		2FC6E9501AD6F17E00F8831D /* AdFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdFactory.m; sourceTree = "<group>"; };
-		2FC6E9561AD6F90700F8831D /* BubbleSpritesHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleSpritesHeader.h; sourceTree = "<group>"; };
-		2FC6E9581AD6F90700F8831D /* sprites.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.1.png; sourceTree = "<group>"; };
-		2FC6E9591AD6F90700F8831D /* sprites.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sprites.plist; sourceTree = "<group>"; };
 		2FC6E95E1AD7077200F8831D /* AdAvocarrot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdAvocarrot.h; sourceTree = "<group>"; };
 		2FC6E95F1AD7077200F8831D /* AdAvocarrot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdAvocarrot.m; sourceTree = "<group>"; };
 		2FC6E9611AD7079200F8831D /* AdInMobi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInMobi.h; sourceTree = "<group>"; };
@@ -296,6 +296,17 @@
 			path = IMUtilities;
 			sourceTree = "<group>";
 		};
+		2FC2BED61ADF01880004F6DA /* spritesBubble.atlasc */ = {
+			isa = PBXGroup;
+			children = (
+				2FC2BED71ADF01880004F6DA /* spritesBubble.1.png */,
+				2FC2BED81ADF01880004F6DA /* spritesBubble.2.png */,
+				2FC2BED91ADF01880004F6DA /* spritesBubble.3.png */,
+				2FC2BEDA1ADF01880004F6DA /* spritesBubble.plist */,
+			);
+			path = spritesBubble.atlasc;
+			sourceTree = "<group>";
+		};
 		2FC6E9411AD6E9BD00F8831D /* BubbleAdsClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,20 +337,9 @@
 		2FC6E9551AD6F90700F8831D /* Bubble Assets */ = {
 			isa = PBXGroup;
 			children = (
-				2FBD65E71ADD46CA002DE892 /* spritesBubble.atlas */,
-				2FC6E9561AD6F90700F8831D /* BubbleSpritesHeader.h */,
-				2FC6E9571AD6F90700F8831D /* sprites.atlasc */,
+				2FC2BED61ADF01880004F6DA /* spritesBubble.atlasc */,
 			);
 			path = "Bubble Assets";
-			sourceTree = "<group>";
-		};
-		2FC6E9571AD6F90700F8831D /* sprites.atlasc */ = {
-			isa = PBXGroup;
-			children = (
-				2FC6E9581AD6F90700F8831D /* sprites.1.png */,
-				2FC6E9591AD6F90700F8831D /* sprites.plist */,
-			);
-			path = sprites.atlasc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,11 +423,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				21CEE3351AB773BF005E285A /* LaunchScreen.xib in Resources */,
-				2FC6E95B1AD6F90700F8831D /* sprites.plist in Resources */,
-				2FC6E95A1AD6F90700F8831D /* sprites.1.png in Resources */,
 				21CEE3321AB773BF005E285A /* Images.xcassets in Resources */,
-				2FBD65E81ADD46CA002DE892 /* spritesBubble.atlas in Resources */,
 				21CEE32A1AB773BE005E285A /* AdBubbleScene.sks in Resources */,
+				2FC2BEDE1ADF01880004F6DA /* spritesBubble.plist in Resources */,
+				2FC2BEDC1ADF01880004F6DA /* spritesBubble.2.png in Resources */,
+				2FC2BEDB1ADF01880004F6DA /* spritesBubble.1.png in Resources */,
+				2FC2BEDD1ADF01880004F6DA /* spritesBubble.3.png in Resources */,
 				21CEE3301AB773BE005E285A /* Main.storyboard in Resources */,
 				2FBAB14F1AD5751800173FB2 /* bubbles_background.jpg in Resources */,
 			);
@@ -437,7 +438,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FBD65E91ADD46CA002DE892 /* spritesBubble.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

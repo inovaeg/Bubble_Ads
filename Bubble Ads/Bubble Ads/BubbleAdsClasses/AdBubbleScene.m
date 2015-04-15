@@ -7,7 +7,7 @@
 //
 
 #import "AdBubbleScene.h"
-#import "BubbleSpritesHeader.h"
+//#import "BubbleSpritesHeader.h"
 #import "AdsManager.h"
 
 #define AD_DIC_KEY @"adObject"
@@ -100,7 +100,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         //        NSLog(@"Size: %@", NSStringFromCGSize(size));
 
         //Loading SpriteSheet
-        self->atlas = [SKTextureAtlas atlasNamed:SPRITES_ATLAS_NAME];
+        self->atlas = [SKTextureAtlas atlasNamed:@"spritesBubble"];
         
         self.minVelocity = BUBBLE_SPEED;
         self.bubblesCount = BUBBLES_COUNT;
@@ -195,7 +195,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 }
 
 -(UIImage *)getCircleImage:(UIImage *)image withRadius:(CGFloat)radius{
-    
     // create the image with rounded corners
     CGFloat diameter = radius * 2;
 //    UIGraphicsBeginImageContextWithOptions(CGSizeMake(diameter,diameter), NO, 0);
@@ -511,13 +510,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     //[bubble removeAllActions];
     SKTextureAtlas * spriteAtlas = [SKTextureAtlas atlasNamed:@"spritesBubble"];
     NSMutableArray * animatedBubbleCollisionTextureArray = [[NSMutableArray alloc] init];
-    for(NSInteger i = 0; i <= 28 /*BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT*/ ; i++){
+    for(NSInteger i = 0; i <= 39 /*BUBBLE_COLLISION_ANIMATION_FRAMES_COUNT*/ ; i++){
         NSString * imageName = [NSString stringWithFormat:@"collision_%ld.png",(long)i];
         SKTexture * texture = [spriteAtlas textureNamed:imageName];
         [animatedBubbleCollisionTextureArray addObject:texture];
     }
     
-    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:(0.8f/29.0f) /*BUBBLE_COLLISION_ANIMATION_FRAME_TIME*/ resize:NO restore:NO];
+    SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:(0.8f/40.0f) /*BUBBLE_COLLISION_ANIMATION_FRAME_TIME*/ resize:NO restore:NO];
 //    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION2 timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
     [bubble runAction:[SKAction repeatAction:actionAnimation count:1] completion:^{ // count:2
