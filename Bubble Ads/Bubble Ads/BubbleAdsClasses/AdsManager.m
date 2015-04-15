@@ -166,8 +166,8 @@
 
 -(void)requestAd{
     
-    self.nativeAd = [[IMNative alloc] initWithAppId:@"20a1885a75074931946458f6d190cbd4"];
-    self.nativeAd.delegate = self;
+//    self.nativeAd = [[IMNative alloc] initWithAppId:@"20a1885a75074931946458f6d190cbd4"];
+//    self.nativeAd.delegate = self;
 //    [self.nativeAd loadAd];
     
     AvocarrotCustom *myAd = [[AvocarrotCustom alloc] init];
