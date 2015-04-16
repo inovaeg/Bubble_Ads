@@ -17,7 +17,7 @@
 #define BUBBLE_NODE_NAME @"BubbleNode"
 #define AD_NODE_NAME @"AdNode"
 
-#define ADS_IMAGE_PADDING 55
+#define ADS_IMAGE_PADDING 170
 
 #define NORMAL_BUBBLE_ANIMATION_FRAME_TIME 0.07
 #define NORMAL_BUBBLE_ANIMATION_FRAMES_COUNT 36
@@ -43,6 +43,7 @@
 {
     UIView* shadowView;
     UIDeviceOrientation currentOrientation;
+    CGFloat bubbleScale;
 }
 
 @property (nonatomic) SKSpriteNode * selectedNode;
@@ -97,13 +98,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        //        NSLog(@"Size: %@", NSStringFromCGSize(size));
-
         //Loading SpriteSheet
         self->atlas = [SKTextureAtlas atlasNamed:@"spritesBubble"];
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        bubbleScale = (screenRect.size.width > screenRect.size.height)? screenRect.size.width / 1024 : screenRect.size.height / 1024;
         
         self.minVelocity = BUBBLE_SPEED;
-        self.bubblesCount = BUBBLES_COUNT;
+        self.bubblesCount = ceil( BUBBLES_COUNT * bubbleScale );
         self.bubblesArray = [[NSMutableArray alloc] init];
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0];
         
@@ -164,7 +165,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(void)applyBubbleProperties:(SKSpriteNode *)node{
     
 //    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:BUBBLE_RADIUS];
-    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30)/2];
+    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:(node.size.width - 30*bubbleScale) /2];
     node.physicsBody.dynamic = YES;
     node.physicsBody.usesPreciseCollisionDetection = YES;
     node.physicsBody.density = 5;
@@ -228,17 +229,18 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(SKSpriteNode *)addAdImage:(UIImage *)adImage toBubble:(SKSpriteNode *)bubble{
     
     
-    CGFloat adImagePadding = ADS_IMAGE_PADDING;
+//    CGFloat adImagePadding = ADS_IMAGE_PADDING;
     CGFloat minSize = adImage.size.height;
     if(minSize > adImage.size.width){
         minSize = adImage.size.width;
     }
     
-    CGFloat newImageSize = minSize - adImagePadding*2;
-    UIImage * circleAdImage = [self getCircleImage:adImage withRadius:newImageSize/2];
+//    CGFloat newImageSize = minSize - adImagePadding*2;
+//    UIImage * circleAdImage = [self getCircleImage:adImage withRadius:newImageSize/2];
+    UIImage * circleAdImage = [self getCircleImage:adImage withRadius:minSize/2];
     SKTexture * adTexture = [SKTexture textureWithImage:circleAdImage];
     
-    SKSpriteNode * adNode = [SKSpriteNode spriteNodeWithTexture:adTexture size:CGSizeMake( bubble.size.width - adImagePadding*2 , bubble.size.height -adImagePadding*2)];
+    SKSpriteNode * adNode = [SKSpriteNode spriteNodeWithTexture:adTexture size:CGSizeMake( ADS_IMAGE_PADDING,ADS_IMAGE_PADDING /*bubble.size.width - adImagePadding*2 , bubble.size.height - adImagePadding*2*/ )];
     adNode.name = AD_NODE_NAME;
     adNode.position = CGPointMake(0, 0);
     
@@ -257,6 +259,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 -(SKSpriteNode *)addBubble:(NSString *)bubbleImageName atCenter:(CGPoint)center withImage:(UIImage *)image{
     
     SKSpriteNode * bubbleNode = [SKSpriteNode spriteNodeWithImageNamed:bubbleImageName];
+    [bubbleNode setScale:bubbleScale];
     bubbleNode.name = BUBBLE_NODE_NAME;
     bubbleNode.position = center;
     bubbleNode.alpha = 0.0f;
@@ -317,7 +320,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     self.lastSpawnTimeInterval += timeSinceLast;
     if (self.lastSpawnTimeInterval > 1) {
         self.lastSpawnTimeInterval = 0;
-        
         
         for(NSInteger i = 0 ; i < self.bubblesArray.count; i++){
             SKSpriteNode * ad = [self.bubblesArray objectAtIndex:i];
@@ -495,11 +497,6 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     SKAction * actionOpenAd = [SKAction runBlock:^{
         AdFactory * ad = [bubble.userData objectForKey:AD_DIC_KEY];
         [ad openWithView:self.view];
-//        AVCustomAd * ad = [bubble.userData objectForKey:AVOCARROT_AD_DIC_KEY];
-//        [self openAd:ad];
-//        IMNative * ad = [bubble.userData objectForKey:INMOBI_AD_DIC_KEY];
-//        [ad attachToView:self.view];
-//        [ad handleClick:nil];
     }];
     [bubble runAction:[SKAction sequence:[NSArray arrayWithObjects:actionAnimation, actionOpenAd,actionMoveDone, nil]]];
 }
@@ -519,7 +516,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
     SKAction * actionAnimation = [SKAction animateWithTextures:animatedBubbleCollisionTextureArray timePerFrame:(0.8f/40.0f) /*BUBBLE_COLLISION_ANIMATION_FRAME_TIME*/ resize:NO restore:NO];
 //    SKAction * actionAnimation = [SKAction animateWithTextures:SPRITES_ANIM_BUBBLE_COLLISION2 timePerFrame:BUBBLE_COLLISION_ANIMATION_FRAME_TIME resize:NO restore:NO];
     
-    [bubble runAction:[SKAction repeatAction:actionAnimation count:1] completion:^{ // count:2
+    [bubble runAction:[SKAction repeatAction:actionAnimation count:1] completion:^{
         [bubble removeAllActions];
         [self applyBubbleAnimationToBubble:bubble];
     }];
