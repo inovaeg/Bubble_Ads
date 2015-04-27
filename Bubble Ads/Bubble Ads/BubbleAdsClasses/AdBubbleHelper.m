@@ -18,14 +18,14 @@
 @implementation AdBubbleHelper
 
 + (void)startWithView:(SKView *)skView{
-        skView.allowsTransparency = YES;
-        skView.ignoresSiblingOrder = YES;
-        
-        SKScene * scene = [AdBubbleScene sceneWithSize:skView.bounds.size];
-        scene.scaleMode = SKSceneScaleModeResizeFill;
-        
-        // Present the scene.
-        [skView presentScene:scene];
+    skView.allowsTransparency = YES;
+    skView.ignoresSiblingOrder = YES;
+    
+    SKScene * scene = [AdBubbleScene sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeResizeFill;
+    
+    // Present the scene.
+    [skView presentScene:scene];
 }
 
 @end

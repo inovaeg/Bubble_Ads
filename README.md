@@ -49,13 +49,47 @@ and then:
 
 * In your ViewController Request presenting Ads.
 
-Finally add required frameworks:
+For help [support@inovaeg.com](support@inovaeg.com)
+
+##Installation For Cocos2d
+
+To use this project just pull or download it and import it to your project.
+
+Also adding resource file `Bubble Ads Box2D` to the project
+
+For help [support@inovaeg.com](support@inovaeg.com)
+
+##Adding Required Ads Frameworks
+
+Add required frameworks to support AvoCarrot Ads:
 
 1. **AvocarrotSDK.framework**
 2. **AdSupport.framework**
 3. **CoreTelephony.framework**
 4. **SystemConfiguration.framework**
 5. **CoreGraphics.framework**
+
+Add required frameworks to support InMobi Ads:
+
+1. **AdSupport.framework**
+2. **AudioToolbox.framework**
+3. **AVFoundation.framework**
+4. **CoreLocation.framework**
+5. **CoreTelephony.framework**
+6. **EventKit.framework**
+7. **EventKitUI.framework**
+8. **MediaPlayer.framework**
+9. **MessageUI.framework**
+10. **Security.framework**
+11. **Social.framework**
+12. **StoreKit.framework**
+13. **SystemConfiguration.framework**
+14. **libsqlite3.0.dylib**
+15. **libz.dylib**
+
+Adding additional build settings:
+
+Add the **-ObjC** flag to the Other Linker Flags.
 
 For help [support@inovaeg.com](support@inovaeg.com)
 
@@ -82,6 +116,25 @@ You should import:
  
  Then call `[AdBubbleHelper startWithView:self.sceneView];` inside `-(void) viewDidLoad` method here you to start
  displaying Bubble Ads.
+ 
+##Tests Cocos2d
+Note: We're using LevelHelper to design scene and SpriteHelper to render sprites, you could choose any other
+frameworks and change spritesheets the way you like.
+There is a class called **HellowWorldLayer**, here you can test or use our library.
+
+You should import:
+ `#import "BubbleAdWorld.h"`
+ 
+ Then call `
+    BubbleAdWorld* _bubbleAdWorld = [[[BubbleAdWorld alloc] initWithDelegate:self] autorelease];
+    [self addChild:_bubbleAdWorld];` 
+ inside `-(void)onEnter` or `-(void)onEnterTransitionDidFinish` method here you to start displaying Bubble Ads.
+ You could implement `BubbleAdWorldDelegate` delegate methods:
+ 
+ 1. `-(void)adEnableTouch` to enable parent view touch
+ 2. `-(void)adDisableTouch` to disable parent view touch
+ 
+ If you don't want to implement them, just use `[BubbleAdWorld alloc] initWithDelegate:nil]` instead.
 
 ##Contributor list
 

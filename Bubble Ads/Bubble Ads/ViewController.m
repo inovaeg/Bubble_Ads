@@ -16,6 +16,12 @@
     [super viewDidLoad];
     //Put this method inside your ViewDidLoad method
     [AdBubbleHelper startWithView:self.sceneView];
+    
+    //You could initialize it programatically if you want
+    /* 
+    SKView* view = [[SKView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.view addSubview:view];
+    [AdBubbleHelper startWithView:view]; */
 }
 
 - (BOOL)shouldAutorotate
