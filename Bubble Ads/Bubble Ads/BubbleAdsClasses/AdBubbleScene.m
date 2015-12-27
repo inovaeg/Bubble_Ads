@@ -106,7 +106,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         self.minVelocity = BUBBLE_SPEED;
         self.bubblesCount = ceil( BUBBLES_COUNT * bubbleScale );
         self.bubblesArray = [[NSMutableArray alloc] init];
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0];
+        self.backgroundColor = [SKColor clearColor];
         
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
@@ -136,7 +136,13 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
         //still saving the current orientation
         return;
     }else{
-        [self updateBubbleLocationsAndPhysicalBodyWithFrameRect:self.view.frame];
+        CGRect newBounds = self.frame;
+        if (0 != currentOrientation) {
+            int w = newBounds.size.width;
+            newBounds.size.width = newBounds.size.height;
+            newBounds.size.height = w;
+        }
+        [self updateBubbleLocationsAndPhysicalBodyWithFrameRect:newBounds];
         currentOrientation = orientation;
     }
     //Do my thing
@@ -144,7 +150,7 @@ static inline CGVector getRandomVelocity(CGFloat velocity, CGVector oldVelocity)
 
 -(void)updateBubbleLocationsAndPhysicalBodyWithFrameRect:(CGRect)rect{
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:rect];
-    
+    self.physicsBody.usesPreciseCollisionDetection = YES;
     for(NSInteger i = 0 ; i < self.bubblesArray.count; i++){
         SKSpriteNode * node = [self.bubblesArray objectAtIndex:i];
         CGPoint position = [node position];
